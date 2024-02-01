@@ -1,5 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello!");
+        CarSimulator sim = new CarSimulator();
+
+
+        Wheel wheel = new Wheel();
+        Engine engine = new Engine();
+        CarBuilder builder = new CarBuilder();
+        builder.checkWheelAndEngine(wheel, engine);
     }
 }
