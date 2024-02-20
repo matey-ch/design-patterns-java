@@ -5,9 +5,11 @@ public class Main {
 
         TransportFactory volvoFactory = new VolvoFactory();
         TransportFactory skodaFactory = new SkodaFactory();
+        TransportFactory hyundaiFactory = new HyundaiFactory();
 
         ArrayList<Transport> volvoTransports = new ArrayList<>();
         ArrayList<Transport> skodaTransports = new ArrayList<>();
+        ArrayList<Transport> hyundaiTransports = new ArrayList<>();
 
 //        ArrayList<Bus> buses = new ArrayList<>();
 //        ArrayList<Tram> trams = new ArrayList<>();
@@ -25,6 +27,9 @@ public class Main {
             Bus skodaBus = skodaFactory.createBus();
             skodaTransports.add(skodaBus);
             skodaBus.goByWay();
+            Bus hyundaiBus = hyundaiFactory.createBus();
+            hyundaiTransports.add(hyundaiBus);
+            hyundaiBus.goByWay();
         }
 
         for (int i = 0; i < T; i++) {
@@ -34,6 +39,9 @@ public class Main {
             Tram skodaTram = skodaFactory.createTram();
             skodaTransports.add(skodaTram);
             skodaTram.goByRails();
+            Tram hyundaiTram = hyundaiFactory.createTram();
+            hyundaiTransports.add(hyundaiTram);
+            hyundaiTram.goByRails();
         }
 
         for (int i = 0; i < Tr; i++) {
@@ -43,6 +51,9 @@ public class Main {
             Trolleybus skodaTrolleybus = skodaFactory.createTrolleybus();
             skodaTransports.add(skodaTrolleybus);
             skodaTrolleybus.goByContactNetwork();
+            Trolleybus hyundaiTrolleybus = hyundaiFactory.createTrolleybus();
+            hyundaiTransports.add(hyundaiTrolleybus);
+            hyundaiTrolleybus.goByContactNetwork();
         }
 
 
@@ -56,8 +67,14 @@ public class Main {
             finalSkodaCost += transport.getTotalCost(N);
         }
 
+        int finalHyundaiCost = 0;
+        for (Transport transport : hyundaiTransports) {
+            finalHyundaiCost += transport.getTotalCost(N);
+        }
+
 
         System.out.println("finalVolvoCost = " + finalVolvoCost);
         System.out.println("finalSkodaCost = " + finalSkodaCost);
+        System.out.println("finalHyundaiCost = " + finalHyundaiCost);
     }
 }
