@@ -3,9 +3,15 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        ArrayList<Bus> buses = new ArrayList<>();
-        ArrayList<Tram> trams = new ArrayList<>();
-        ArrayList<Trolleybus> trolleybuses = new ArrayList<>();
+        TransportFactory volvoFactory = new VolvoFactory();
+        TransportFactory skodaFactory = new SkodaFactory();
+
+        ArrayList<Transport> volvoTransports = new ArrayList<>();
+        ArrayList<Transport> skodaTransports = new ArrayList<>();
+
+//        ArrayList<Bus> buses = new ArrayList<>();
+//        ArrayList<Tram> trams = new ArrayList<>();
+//        ArrayList<Trolleybus> trolleybuses = new ArrayList<>();
 
         final int A = 10;       // закупити A автобусів
         final int T = 5;        // закупити T трамваїв
@@ -13,33 +19,45 @@ public class Main {
         final int N = 200_000;  // орієнтований пробіг експлуатації
 
         for (int i = 0; i < A; i++) {
-            Bus bus = new Bus(4500000, 25);
-            buses.add(bus);
+            Bus volvoBus = volvoFactory.createBus();
+            volvoTransports.add(volvoBus);
+            volvoBus.goByWay();
+            Bus skodaBus = skodaFactory.createBus();
+            skodaTransports.add(skodaBus);
+            skodaBus.goByWay();
         }
 
         for (int i = 0; i < T; i++) {
-            Tram tram = new Tram(9_000_000, 8);
-            trams.add(tram);
+            Tram volvoTram = volvoFactory.createTram();
+            volvoTransports.add(volvoTram);
+            volvoTram.goByRails();
+            Tram skodaTram = skodaFactory.createTram();
+            skodaTransports.add(skodaTram);
+            skodaTram.goByRails();
         }
 
         for (int i = 0; i < Tr; i++) {
-            Trolleybus trolley = new Trolleybus(6_800_000, 13);
-            trolleybuses.add(trolley);
+            Trolleybus volvoTrolleybus = volvoFactory.createTrolleybus();
+            volvoTransports.add(volvoTrolleybus);
+            volvoTrolleybus.goByContactNetwork();
+            Trolleybus skodaTrolleybus = skodaFactory.createTrolleybus();
+            skodaTransports.add(skodaTrolleybus);
+            skodaTrolleybus.goByContactNetwork();
         }
 
-        int finalCostContract = 0;
-        for (Bus bus : buses) {
-            finalCostContract += bus.getCost() + bus.getUsageCost() * N;
+
+        int finalVolvoCost = 0;
+        for (Transport transport : volvoTransports) {
+            finalVolvoCost += transport.getTotalCost(N);
         }
 
-        for (Tram tram : trams) {
-            finalCostContract += tram.getCost() + tram.getUsageCost() * N;
+        int finalSkodaCost = 0;
+        for (Transport transport : skodaTransports) {
+            finalSkodaCost += transport.getTotalCost(N);
         }
 
-        for (Trolleybus trolleybus : trolleybuses) {
-            finalCostContract += trolleybus.getCost() + trolleybus.getUsageCost() * N;
-        }
 
-        System.out.println(finalCostContract);
+        System.out.println("finalVolvoCost = " + finalVolvoCost);
+        System.out.println("finalSkodaCost = " + finalSkodaCost);
     }
 }

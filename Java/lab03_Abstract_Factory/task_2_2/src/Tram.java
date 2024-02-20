@@ -1,4 +1,4 @@
-public class Tram {
+public abstract class Tram implements Transport {
     protected Tram(int cost, int usageCost) {
         this.cost = cost;
         this.usageCost = usageCost;
@@ -12,11 +12,16 @@ public class Tram {
         return usageCost;
     }
 
+    public int getTotalCost(int km) {
+        return cost+usageCost*km;
+    }
+
+
     public void goByRails() {
         System.out.println("Tram runs!");
     }
 
-    private final int cost;       // Вартість одиниці транспорту
-    private final int usageCost;  //  Вартість експлуатації = вартість одного кілометру пробігу
+    protected final int cost;       // Вартість одиниці транспорту
+    protected final int usageCost;  //  Вартість експлуатації = вартість одного кілометру пробігу
 
 }
