@@ -1,0 +1,6 @@
+text1
+test
+line3
+line4
+RandomNumberAdder wrote this random number here: 0.8148111711281087
+Main was working on this file too.
