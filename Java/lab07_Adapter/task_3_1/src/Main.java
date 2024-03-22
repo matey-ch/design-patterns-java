@@ -29,22 +29,52 @@ public class Main {
         samsung.unplugCharger();
         printBatteryStatus(samsung);
 
-//        TODO: implement and use adapter USB => Type-C
-//        samsung.pluginCharger(charger);  // Fixme: implement adapter
-        System.out.println("Charging throughout adapter");
+
+//        samsung.pluginCharger(charger);
+        System.out.println("\nCharging throughout adapter");
         TypeCCharger adapterMicroUsbToTypeC = new AdapterMicroUsbToTypeC(charger);  // адаптер через агрегацію
 //        TypeCCharger adapterMicroUsbToTypeC = new AdapterMicroUsbToTypeCInheritance(5.0f, 1.0f);  // адаптер через наслідування
-//        samsung.pluginCharger(adapterMicroUsbToTypeC);
+        samsung.pluginCharger(adapterMicroUsbToTypeC);
         samsung.charge(10);
         samsung.unplugCharger();
         printBatteryStatus(samsung);
 
 
 //        TODO: implement and use adapter Type-C => USB
-//        System.out.println("Maintaining legacy charging");
-//        phone.pluginCharger(new AdapterTypeCToMicroUsb(fastCharge));
-//        phone.charge(20);
-//        System.out.printf("Current power status = %s%n", phone.getChargingPercent());
+        System.out.println("\nMaintaining legacy charging");
+        System.out.printf("Current power status = %s%n", phone.getChargingPercent());
+        phone.pluginCharger(new AdapterTypeCToMicroUsb(fastCharge));
+        phone.charge(20);
+        phone.unplugCharger();
+        System.out.printf("Current power status = %s%n", phone.getChargingPercent());
+
+
+        System.out.println("\nUsing combining adapter");
+        System.out.printf("Current power status = %s%n", phone.getChargingPercent());
+        phone.pluginCharger(new AdapterCombiningMicroUsbTypeC(fastCharge));
+        phone.charge(20);
+        phone.unplugCharger();
+        System.out.printf("Current power status = %s%n", phone.getChargingPercent());
+        printBatteryStatus(samsung);
+        samsung.pluginCharger(new AdapterCombiningMicroUsbTypeC(fastCharge));
+        samsung.charge(10);
+        samsung.unplugCharger();
+        printBatteryStatus(samsung);
+
+
+        System.out.println("\nUsing universal adapter");
+        UniversalCharger universalCharger = new AdapterToUniversal(charger);
+        System.out.printf("Current power status = %s%n", phone.getChargingPercent());
+        phone.pluginCharger(universalCharger);
+        phone.charge(20);
+        phone.unplugCharger();
+        System.out.printf("Current power status = %s%n", phone.getChargingPercent());
+        printBatteryStatus(samsung);
+        samsung.pluginCharger(universalCharger);
+        samsung.charge(10);
+        samsung.unplugCharger();
+        printBatteryStatus(samsung);
+
 
     }
 
