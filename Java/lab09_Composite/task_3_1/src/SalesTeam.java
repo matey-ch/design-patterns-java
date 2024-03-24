@@ -1,26 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class SalesTeam {
+public class SalesTeam implements Paid {
 
-    private final List<Manager> managers = new ArrayList<>();
-    private final List<Salesperson> salespeople = new ArrayList<>();
+    private final List<Paid> paids= new ArrayList<>();
 
-    void addManager(Manager manager) {
-        managers.add(manager);
+    void addPaid(Paid paid) {
+        paids.add(paid);
     }
 
-    void addSalesperson(Salesperson salesperson) {
-        salespeople.add(salesperson);
-    }
-
+    @Override
     public void payExpenses() {
-        for (Manager manager : managers) {
-            manager.payExpenses();
-        }
-
-        for (Salesperson salesperson : salespeople) {
-            salesperson.payExpenses();
+        for (Paid paid : paids) {
+            paid.payExpenses();
         }
     }
 
