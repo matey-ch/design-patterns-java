@@ -21,6 +21,8 @@ public class CarSimulator {
     executor.scheduleAtFixedRate(createVehicles, 0, 1, TimeUnit.SECONDS);
   }
 
+  static PartsFactory partsFactory = new PartsFactory();
+
   private static void createRandomCar() {
     Random random = new Random();
 
@@ -32,8 +34,8 @@ public class CarSimulator {
     Car car = carBuilder
             .reset()
             .setCarColor(color)
-            .setEngine(new Engine(power, fuel))
-            .setWheel(new Wheel(wheel_diameter))
+            .setEngine(partsFactory.getEngine(power, fuel))
+            .setWheel(partsFactory.getWheel(wheel_diameter))
             .build();
     System.out.println("Creating " + car);
     car.showInfo();
