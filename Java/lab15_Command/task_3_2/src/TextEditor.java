@@ -12,20 +12,31 @@ public class TextEditor {
     final private Shortcut saveShortcut;
     final private Shortcut printShortcut;
 
+    final private Command saveCommand;
+    final private Command printCommand;
+    final private Command showInfoCommand;
+
     public TextEditor() {
-        saveButton = new Button();
-        printButton = new Button();
+        saveCommand = new SaveCommand();
+        showInfoCommand = new ShowInfoCommand();
+        printCommand = new PrintCommand();
 
-        saveMenuItem = new MenuItem();
-        printMenuItem = new MenuItem();
-        showInfoMenuItem = new MenuItem();
+        saveButton = new Button(saveCommand);
+        printButton = new Button(printCommand);
 
-        saveShortcut = new Shortcut();
-        printShortcut = new Shortcut();
+        saveMenuItem = new MenuItem(saveCommand);
+        printMenuItem = new MenuItem(printCommand);
+        showInfoMenuItem = new MenuItem(showInfoCommand);
+
+        saveShortcut = new Shortcut(saveCommand);
+        printShortcut = new Shortcut(printCommand);
     }
 
     public void newDocument(String name) {
         document = new Document(name);
+        saveCommand.setDocument(document);
+        printCommand.setDocument(document);
+        showInfoCommand.setDocument(document);
     }
 
     public void clickSaveButton() {
