@@ -1,7 +1,26 @@
-
-
 public class Client {
     public static void main(String[] args) {
+
+        FileHandler mainFileHandler = new MainFileHandler();
+        FileHandler txtHandler = new TxtHandler();
+        FileHandler jpgHandler = new JpgHandler();
+        FileHandler pngHandler = new PngHandler();
+        FileHandler docHandler = new DocHandler();
+        FileHandler docxHandler = new DocxHandler();
+        FileHandler xlsHandler = new XlsHandler();
+        FileHandler xlsxHandler = new XlsxHandler();
+        FileHandler pptxHandler = new PptxHandler();
+        FileHandler finalHandler = new FinalHandler();
+
+        mainFileHandler.setNext(txtHandler);
+        txtHandler.setNext(jpgHandler);
+        jpgHandler.setNext(pngHandler);
+        pngHandler.setNext(docxHandler);
+        docxHandler.setNext(docHandler);
+        docHandler.setNext(xlsxHandler);
+        xlsxHandler.setNext(xlsHandler);
+        xlsHandler.setNext(pptxHandler);
+        pptxHandler.setNext(finalHandler);
 
         String[] files = {
                 "image.jpg",
@@ -12,11 +31,11 @@ public class Client {
                 "table.xlsx",
                 "presentation.pptx",
                 "document.pdf",
+                "yaml-doc.yaml"
         };
 
-        // Create Chain of responsibility to open file by correct program according to the extension.
         for (String file : files) {
-            // open file
+            mainFileHandler.handle(file);
         }
 
 
