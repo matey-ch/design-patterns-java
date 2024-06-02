@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Літаки у повітрі
  */
-public class PlanesInFlight {
+public class PlanesInFlight extends Component {
 
   /**
    * Список літаків
@@ -26,4 +26,20 @@ public class PlanesInFlight {
     planes.remove(plane);
   }
 
+  @Override
+  public void handleMessage(Component componentFrom, Message message) {
+    String contents = message.getContents();
+    if (contents.equals("PlaneUp")){
+      Plane plane = message.getPlane();
+      this.addPlane(plane);
+      System.out.println("New plane in the air");
+      return;
+    }
+    if (contents.equals("PlaneDown")){
+      Plane plane = message.getPlane();
+      System.out.println("Minus one plane in the air");
+      this.removePlane(plane);
+      return;
+    }
+  }
 }

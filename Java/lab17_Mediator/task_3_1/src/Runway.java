@@ -1,27 +1,30 @@
 /**
  * Злітно-посадкова смуга
  */
-public class Runway {
-
+public class Runway extends Component {
   /**
    * Чи вільна смуга
    */
   private boolean isAvailable = true;
 
-  /**
-   * Встановити стан злітно-посадкової смуги
-   * @param isAvailable значення для встановлення
-   */
-  public void setIsAvailable(boolean isAvailable) {
-    this.isAvailable = isAvailable;
-  }
 
-  /**
-   * Повертає значення чи вільна злітно-посадкова смуга
-   * @return чи вільна злітно-посадкова смуга
-   */
-  public boolean getIsAvailable() {
-    return isAvailable;
+  public void handleMessage(Component componentFrom, Message message) {
+    String contents = message.getContents();
+    if (contents.equals("ClearRunway")){
+      this.isAvailable = true;
+      System.out.println("Runway is clear");
+      return;
+    }
+    if (contents.equals("IsRunwayAvailable")){
+      if (this.isAvailable){
+        this.isAvailable = false;
+        broadcastMessage(new Message("RunwayFree", message.getPlane()));
+      }
+      else {
+        broadcastMessage(new Message("RunwayBusy", message.getPlane()));
+      }
+      return;
+    }
   }
 
 }
