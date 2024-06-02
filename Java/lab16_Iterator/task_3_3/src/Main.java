@@ -21,5 +21,32 @@ public class Main {
 
         root.execute();
 
+
+        System.out.println("\nDoing BFS");
+        root.setSearch(1);
+        int cheapestPrice = Integer.MAX_VALUE;
+        Component cheapestComponent = null;
+        for (Component component : root) {
+            System.out.println(component);
+            if (component.getPrice()<cheapestPrice){
+                cheapestPrice = component.getPrice();
+                cheapestComponent = component;
+            }
+        }
+        System.out.println("\nCheapest: "+cheapestComponent);
+
+        System.out.println("\nDoing DFS");
+        root.setSearch(0);
+        int biggestPrice = Integer.MIN_VALUE;
+        Component biggestComponent = null;
+        for (Component component : root) {
+            System.out.println(component);
+            if (component.getPrice()>biggestPrice){
+                biggestPrice = component.getPrice();
+                biggestComponent = component;
+            }
+        }
+        System.out.println("\nMost expensive: "+biggestComponent);
+
     }
 }
