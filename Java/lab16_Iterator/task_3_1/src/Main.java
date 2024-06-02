@@ -8,13 +8,12 @@ public class Main {
 
     StaffList staffList = new StaffList();
     staffList.addEmployee(zak);
-    staffList.addEmployee(sarah);
     staffList.addEmployee(anna);
+    staffList.addEmployee(sarah);
 
-          // TODO: Implement pattern to run commented code
-//    for (Employee employee : StaffList){
-//      System.out.println(employee);
-//    }
+    for (Employee employee : staffList){
+      System.out.println(employee);
+    }
 
   }
 
